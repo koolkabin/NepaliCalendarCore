@@ -8,8 +8,27 @@
     <PackageId>NepaliCalendarCore</PackageId>
     <Authors>Kabindra Bakey</Authors>
     <Company>ANTS Pvt. Ltd</Company>
-    <Description>Core version of Nepali Calendar</Description>
+    <Description>Core version of Nepali Calendar
+Conversion between AD to BS too and fro
+cool feature of month info for getting start date, end date, total days as well as recursive previous and next month info
+unicode number to word conversion</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/koolkabin/NepaliCalendarCore.git</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/koolkabin/NepaliCalendarCore.git</RepositoryUrl>
+    <PackageTags>Nepali Calendar, AD to BS, BS to AD, Nepali Number to Words, Nepali MonthInfo</PackageTags>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <PackageReleaseNotes>Addition of Project url and sample use cases</PackageReleaseNotes>
+    <Copyright>Copyright (c) Essence Technologies 2022</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
