@@ -20,6 +20,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static DateTime ToAD(this string str)
         {
+            str.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.ToEnglish(str);
         }
         /// <summary>
@@ -39,6 +40,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static string BSAddMonths(this string str, int Months)
         {
+            str.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.AddMonths(str, Months);
         }
         /// <summary>
@@ -49,6 +51,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static string BSAddYears(this string str, int Years)
         {
+            str.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.AddYears(str, Years);
         }
 
@@ -60,6 +63,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static int BSDayCountAfterMonths(this string str, int Months)
         {
+            str.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.AddMonthsAndGetDayCount(str, Months);
         }
         /// <summary>
@@ -70,6 +74,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static int BSDayCountAfterYears(this string str, int Years)
         {
+            str.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.AddYearsAndGetDayCount(str, Years);
         }
         /// <summary>
@@ -80,6 +85,8 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static int BSDayCount(this string str, string ToNepaliDate)
         {
+            str.BSCheckValidAndThrow();
+            ToNepaliDate.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.GetDayCount(str, ToNepaliDate);
         }
         /// <summary>
@@ -90,6 +97,8 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static int BSMonthCount(this string str, string ToNepaliDate)
         {
+            str.BSCheckValidAndThrow();
+            ToNepaliDate.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.GetMonthCount(str, ToNepaliDate);
         }
         /// <summary>
@@ -99,6 +108,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static bool IsLeapYear(this string str)
         {
+            str.BSCheckValidAndThrow();
             return NepaliCalendar.Convert.IsLeapYear(System.Convert.ToInt32(str.Substring(0, 4)));
         }
         /// <summary>
@@ -108,6 +118,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static MonthInfo BSMonthInfo(this string str)
         {
+            str.BSCheckValidAndThrow();
             return new MonthInfo(str);
         }
         /// <summary>
@@ -121,5 +132,12 @@ namespace NepaliCalendar
             //) { throw new Exception("Should be in yyyy/MM/dd Format with 10 chars as lenght."); }
             //return true;
         }
+        public static bool BSCheckValidAndThrow(this string str)
+        {
+            if (!str.BSIsValid()) { throw new Exception("Should be in yyyy/MM/dd Format with 10 chars as lenght."); }
+            return true;
+        }
+
+
     }
 }
