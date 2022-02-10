@@ -22,6 +22,7 @@ unicode number to word conversion</Description>
     <Copyright>Copyright (c) Essence Technologies 2022</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
