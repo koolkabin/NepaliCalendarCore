@@ -18,11 +18,11 @@ unicode number to word conversion</Description>
     <PackageTags>Nepali Calendar, AD to BS, BS to AD, Nepali Number to Words, Nepali MonthInfo</PackageTags>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
-    <PackageReleaseNotes>Added string and date time extension method for quick task</PackageReleaseNotes>
+    <PackageReleaseNotes>Pattern Check addition</PackageReleaseNotes>
     <Copyright>Copyright (c) Essence Technologies 2022</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
