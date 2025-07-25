@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NepaliCalendar
+namespace NepaliCalendar.Utils
 {
     public static class Convert
     {
@@ -134,7 +134,7 @@ namespace NepaliCalendar
                         {104, new int[] {2079, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30}},
                         {105, new int[] {2080, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30}},
                         {106, new int[] {2081, 31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31}},
-                        {107, new int[] {2082, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30}},
+                        {107, new int[] {2082, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30}},
                         {108, new int[] {2083, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30}},
                         {109, new int[] {2084, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31}},
                         {110, new int[] {2085, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31}},
@@ -399,7 +399,7 @@ namespace NepaliCalendar
                 int numDay = 0;
 
                 // count total no. of days in-terms of year
-                for (i = 0; i < (yy - def_eyy); i++)
+                for (i = 0; i < yy - def_eyy; i++)
                 {   //total days for month calculation...(english)
                     if (IsLeapYear(def_eyy + i))
                         for (j = 0; j < 12; j++)
@@ -410,7 +410,7 @@ namespace NepaliCalendar
                 }
 
                 // count total no. of days in-terms of month					
-                for (i = 0; i < (mm - 1); i++)
+                for (i = 0; i < mm - 1; i++)
                 {
                     if (IsLeapYear(yy))
                         total_eDays += lmonth[i];
@@ -500,7 +500,7 @@ namespace NepaliCalendar
             {
 
                 // count total days in-terms of year
-                for (i = 0; i < (yy - def_nyy); i++)
+                for (i = 0; i < yy - def_nyy; i++)
                 {
                     for (j = 1; j <= 12; j++)
                     {
@@ -558,8 +558,8 @@ namespace NepaliCalendar
 
         public static int GetDayCount(string nepStartDate, string nepEndDate)
         {
-            var engStartDate = Convert.ToEnglish(nepStartDate);
-            var engEndDate = Convert.ToEnglish(nepEndDate);
+            var engStartDate = ToEnglish(nepStartDate);
+            var engEndDate = ToEnglish(nepEndDate);
             return (engEndDate - engStartDate).Days;
         }
 
@@ -567,15 +567,15 @@ namespace NepaliCalendar
         {
             get
             {
-                return Convert.ToNepali(DateTime.Today);
+                return ToNepali(DateTime.Today);
             }
         }
 
         public static string AddDays(string date, int count)
         {
-            var englishdate = Convert.ToEnglish(date);
+            var englishdate = ToEnglish(date);
             var addedcountdate = englishdate.AddDays(count);
-            return Convert.ToNepali(addedcountdate);
+            return ToNepali(addedcountdate);
         }
 
         public static int GetMonthCount(string opendate, string maturdate)
@@ -585,18 +585,18 @@ namespace NepaliCalendar
             NepDate MatureEngish = new NepDate(maturdate);
             if (OpenEnglish.Month > MatureEngish.Month)
             {
-                count = ((MatureEngish.Year - OpenEnglish.Year) * 12) + OpenEnglish.Month - MatureEngish.Month;
+                count = (MatureEngish.Year - OpenEnglish.Year) * 12 + OpenEnglish.Month - MatureEngish.Month;
             }
             else
             {
                 if (OpenEnglish.Day > MatureEngish.Day)
                 {
-                    count = ((MatureEngish.Year - OpenEnglish.Year) * 12) + MatureEngish.Month - OpenEnglish.Month;
+                    count = (MatureEngish.Year - OpenEnglish.Year) * 12 + MatureEngish.Month - OpenEnglish.Month;
 
                 }
                 else
                 {
-                    count = ((MatureEngish.Year - OpenEnglish.Year) * 12) + MatureEngish.Month - OpenEnglish.Month + 1;
+                    count = (MatureEngish.Year - OpenEnglish.Year) * 12 + MatureEngish.Month - OpenEnglish.Month + 1;
                 }
             }
 
@@ -609,8 +609,8 @@ namespace NepaliCalendar
             NepDate convertDate = new NepDate(date);
             for (int i = 0; i < month; i++)
             {
-                int daycount = Convert.GetMonthDayCount(convertDate.Year, convertDate.Month);
-                convertDate = new NepDate(Convert.AddDays(convertDate.ToString(), daycount));
+                int daycount = GetMonthDayCount(convertDate.Year, convertDate.Month);
+                convertDate = new NepDate(AddDays(convertDate.ToString(), daycount));
                 count += daycount;
             }
             return count;
@@ -623,8 +623,8 @@ namespace NepaliCalendar
             int month = year * 12;
             for (int i = 0; i < month; i++)
             {
-                int daycount = Convert.GetMonthDayCount(convertDate.Year, convertDate.Month);
-                convertDate = new NepDate(Convert.AddDays(convertDate.ToString(), daycount));
+                int daycount = GetMonthDayCount(convertDate.Year, convertDate.Month);
+                convertDate = new NepDate(AddDays(convertDate.ToString(), daycount));
                 count += daycount;
             }
             return count;
@@ -651,7 +651,7 @@ namespace NepaliCalendar
                 convertDate.Month = rem1;
             }
 
-            int prevdaycount = Convert.GetMonthDayCount(convertDate.Year, convertDate.Month);
+            int prevdaycount = GetMonthDayCount(convertDate.Year, convertDate.Month);
             if (prevdaycount < convertDate.Day)
             {
                 convertDate.Day = prevdaycount;
@@ -662,10 +662,10 @@ namespace NepaliCalendar
 
             for (int i = 0; i < month; i++)
             {
-                prevdaycount = Convert.GetMonthDayCount(convertDate.Year, convertDate.Month);
-                NepDate newdate = new NepDate(Convert.AddDays(convertDate.ToString(), prevdaycount));
+                prevdaycount = GetMonthDayCount(convertDate.Year, convertDate.Month);
+                NepDate newdate = new NepDate(AddDays(convertDate.ToString(), prevdaycount));
                 //return newdate.ToString();
-                int nextdaycount = Convert.GetMonthDayCount(newdate.Year, newdate.Month);
+                int nextdaycount = GetMonthDayCount(newdate.Year, newdate.Month);
 
                 if (convertDate.Year - newdate.Year == 0)
                 {
@@ -688,7 +688,7 @@ namespace NepaliCalendar
                     {
 
                         //nextdaycount = Convert.GetMonthDayCount(convertDate.Year, convertDate.Month );
-                        newdate = new NepDate(Convert.AddDays(convertDate.ToString(), nextdaycount));
+                        newdate = new NepDate(AddDays(convertDate.ToString(), nextdaycount));
                     }
                     convertDate = newdate;
                 }
@@ -701,7 +701,7 @@ namespace NepaliCalendar
                     else
                     {
                         int daysdifferent = GetDayCount(newdate.ToString(), convertDate.ToString());
-                        newdate = new NepDate(Convert.AddDays(convertDate.ToString(), nextdaycount));
+                        newdate = new NepDate(AddDays(convertDate.ToString(), nextdaycount));
                     }
                     convertDate = newdate;
 
@@ -721,7 +721,7 @@ namespace NepaliCalendar
             int TrackingDate = convertDate.Day;
             int prevmaxdate = GetMonthDayCount(prevDate.Year, prevDate.Month);
 
-            bool isTrackingDateIsMaxDate = (prevmaxdate == TrackingDate);//
+            bool isTrackingDateIsMaxDate = prevmaxdate == TrackingDate;//
             for (int i = 1; i <= month; i++)
             {
                 string strPrevDate = prevDate.ToString();
@@ -737,20 +737,20 @@ namespace NepaliCalendar
 
                 if (isTrackingDateIsMaxDate)
                 {
-                    newDate.Day = Convert.GetMonthDayCount(newDate.Year, newDate.Month);//max date of current month
+                    newDate.Day = GetMonthDayCount(newDate.Year, newDate.Month);//max date of current month
                 }
 
-                if (Convert.IsRangeNep(newDate.Year, newDate.Month, TrackingDate))
+                if (IsRangeNep(newDate.Year, newDate.Month, TrackingDate))
                 {
                     //continue
                 }
                 else
                 {
-                    newDate.Day = Convert.GetMonthDayCount(newDate.Year, newDate.Month);
+                    newDate.Day = GetMonthDayCount(newDate.Year, newDate.Month);
                 }
 
 
-                int dayCount = Convert.GetDayCount(strPrevDate, newDate.ToString());
+                int dayCount = GetDayCount(strPrevDate, newDate.ToString());
 
 
                 ///
@@ -766,9 +766,9 @@ namespace NepaliCalendar
             NepDate convertDate = new NepDate(date);
             NepDate prevDate = convertDate;
             int TrackingDate = convertDate.Day;
-            int prevmaxdate = Convert.GetMonthDayCount(prevDate.Year, prevDate.Month);
+            int prevmaxdate = GetMonthDayCount(prevDate.Year, prevDate.Month);
 
-            bool isTrackingDateIsMaxDate = (prevmaxdate == TrackingDate);//
+            bool isTrackingDateIsMaxDate = prevmaxdate == TrackingDate;//
             for (int i = 1; i <= month; i++)
             {
                 string strPrevDate = prevDate.ToString();
@@ -784,20 +784,20 @@ namespace NepaliCalendar
 
                 if (isTrackingDateIsMaxDate)
                 {
-                    newDate.Day = Convert.GetMonthDayCount(newDate.Year, newDate.Month);//max date of current month
+                    newDate.Day = GetMonthDayCount(newDate.Year, newDate.Month);//max date of current month
                 }
 
-                if (Convert.IsRangeNep(newDate.Year, newDate.Month, TrackingDate))
+                if (IsRangeNep(newDate.Year, newDate.Month, TrackingDate))
                 {
                     //continue
                 }
                 else
                 {
-                    newDate.Day = Convert.GetMonthDayCount(newDate.Year, newDate.Month);
+                    newDate.Day = GetMonthDayCount(newDate.Year, newDate.Month);
                 }
 
 
-                int dayCount = Convert.GetDayCount(strPrevDate, newDate.ToString());
+                int dayCount = GetDayCount(strPrevDate, newDate.ToString());
 
 
                 ///
@@ -812,7 +812,7 @@ namespace NepaliCalendar
             int d = objNepDate.Day;
             int TotalDays = GetMonthDayCount(objNepDate.Year, objNepDate.Month);
 
-            return (TotalDays == d) ? true : false;
+            return TotalDays == d ? true : false;
         }
         public static bool CheckEOQ(string nepDate)
         {

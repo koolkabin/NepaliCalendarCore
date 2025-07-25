@@ -7,28 +7,44 @@
     <DelaySign>false</DelaySign>
     <PackageId>NepaliCalendarCore</PackageId>
     <Authors>Kabindra Bakey</Authors>
-    <Company>ANTS Pvt. Ltd</Company>
+    <Company>Essence Technologies Pvt. Ltd.</Company>
     <Description>Core version of Nepali Calendar
 Conversion between AD to BS too and fro
 cool feature of month info for getting start date, end date, total days as well as recursive previous and next month info
-unicode number to word conversion</Description>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+unicode number to word conversion
+Fix for Year 2082</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/koolkabin/NepaliCalendarCore.git</PackageProjectUrl>
     <RepositoryUrl>https://github.com/koolkabin/NepaliCalendarCore.git</RepositoryUrl>
     <PackageTags>Nepali Calendar, AD to BS, BS to AD, Nepali Number to Words, Nepali MonthInfo</PackageTags>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
-    <PackageReleaseNotes>Pattern Check addition</PackageReleaseNotes>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.4.0.0</FileVersion>
+    <PackageReleaseNotes>Pattern Check addition
+Fix for Year 2082</PackageReleaseNotes>
     <Copyright>Copyright (c) Essence Technologies 2022</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
+    <Title>Nepali Calendar Core Coversion and Operation</Title>
+    <PackageIcon>icon.jpg</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

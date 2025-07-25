@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace NepaliCalendar
+namespace NepaliCalendar.Utils
 {
     public static class NepaliCalendarExtension
     {
@@ -21,7 +21,7 @@ namespace NepaliCalendar
         public static DateTime ToAD(this string str)
         {
             str.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.ToEnglish(str);
+            return Convert.ToEnglish(str);
         }
         /// <summary>
         /// Converts Given Datetime to BS Date
@@ -30,7 +30,7 @@ namespace NepaliCalendar
         /// <returns></returns>
         public static string ToBS(this DateTime str)
         {
-            return NepaliCalendar.Convert.ToNepali(str);
+            return Convert.ToNepali(str);
         }
         /// <summary>
         /// Adds given no of months to given date and return new date
@@ -38,10 +38,21 @@ namespace NepaliCalendar
         /// <param name="str"></param>
         /// <param name="Months"></param>
         /// <returns></returns>
+        [Obsolete("Use AddMonths instead. This will be removed in future versions.", false)]
         public static string BSAddMonths(this string str, int Months)
         {
+            return str.AddMonths(Months);
+        }
+        /// <summary>
+        /// Adds given no of months to given date and return new date
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="Months"></param>
+        /// <returns></returns>
+        public static string AddMonths(this string str, int Months)
+        {
             str.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.AddMonths(str, Months);
+            return Convert.AddMonths(str, Months);
         }
         /// <summary>
         /// Adds given no of years to given date and return new date
@@ -49,10 +60,26 @@ namespace NepaliCalendar
         /// <param name="str"></param>
         /// <param name="Years"></param>
         /// <returns></returns>
+        [Obsolete("Use AddMonths instead. This will be removed in future versions.", false)]
         public static string BSAddYears(this string str, int Years)
         {
+            return str.AddYears(Years);
+        }
+        public static string AddYears(this string str, int Years)
+        {
             str.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.AddYears(str, Years);
+            return Convert.AddYears(str, Years);
+        }
+        /// <summary>
+        /// Adds given no of days to given date and return new date
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="Years"></param>
+        /// <returns></returns>
+        public static string AddDays(this string str, int Days)
+        {
+            str.BSCheckValidAndThrow();
+            return Convert.AddDays(str, Days);
         }
 
         /// <summary>
@@ -64,7 +91,7 @@ namespace NepaliCalendar
         public static int BSDayCountAfterMonths(this string str, int Months)
         {
             str.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.AddMonthsAndGetDayCount(str, Months);
+            return Convert.AddMonthsAndGetDayCount(str, Months);
         }
         /// <summary>
         /// Adds given no of years to the date and returns day count to that date
@@ -75,7 +102,7 @@ namespace NepaliCalendar
         public static int BSDayCountAfterYears(this string str, int Years)
         {
             str.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.AddYearsAndGetDayCount(str, Years);
+            return Convert.AddYearsAndGetDayCount(str, Years);
         }
         /// <summary>
         /// Calculates no of days between two dates
@@ -87,7 +114,7 @@ namespace NepaliCalendar
         {
             str.BSCheckValidAndThrow();
             ToNepaliDate.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.GetDayCount(str, ToNepaliDate);
+            return Convert.GetDayCount(str, ToNepaliDate);
         }
         /// <summary>
         /// Calculates no of months between two dates
@@ -99,7 +126,7 @@ namespace NepaliCalendar
         {
             str.BSCheckValidAndThrow();
             ToNepaliDate.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.GetMonthCount(str, ToNepaliDate);
+            return Convert.GetMonthCount(str, ToNepaliDate);
         }
         /// <summary>
         /// Checks if given date is leap year or not
@@ -109,7 +136,7 @@ namespace NepaliCalendar
         public static bool IsLeapYear(this string str)
         {
             str.BSCheckValidAndThrow();
-            return NepaliCalendar.Convert.IsLeapYear(System.Convert.ToInt32(str.Substring(0, 4)));
+            return Convert.IsLeapYear(System.Convert.ToInt32(str.Substring(0, 4)));
         }
         /// <summary>
         /// Return Month info of current date

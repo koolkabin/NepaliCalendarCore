@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NepaliCalendar.Utils;
+using System;
+using Convert = NepaliCalendar.Utils.Convert;
 
 namespace NepaliCalendar
 {
